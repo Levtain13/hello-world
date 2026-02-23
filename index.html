@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定投计划表</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>定投计划表</h1>
+
+      <section class="card" aria-labelledby="global-settings-title">
+        <h2 id="global-settings-title">全局设置</h2>
+        <div class="row">
+          <label for="ym">计算月份</label>
+          <input id="ym" type="month" />
+        </div>
+        <div class="row">
+          <label for="workdayOnly">仅按工作日计算按天条目</label>
+          <input id="workdayOnly" type="checkbox" checked />
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">新增 / 编辑条目</h2>
+        <form id="itemForm" novalidate>
+          <input type="hidden" id="editingId" />
+          <div class="grid">
+            <label>
+              名称
+              <input id="name" type="text" required />
+            </label>
+            <label>
+              类型
+              <select id="type">
+                <option value="Index">指数</option>
+                <option value="Bond">债券</option>
+                <option value="Gold">黄金</option>
+                <option value="MoneyMarket">货币</option>
+                <option value="Dividend">红利</option>
+                <option value="Other">其他</option>
+              </select>
+            </label>
+            <label>
+              方式
+              <select id="cadence">
+                <option value="monthly">按月</option>
+                <option value="daily">按天</option>
+              </select>
+            </label>
+            <label>
+              金额（元）
+              <input id="amount" type="number" min="0.01" step="0.01" required />
+            </label>
+            <label id="daysPlannedWrap">
+              计划天数
+              <input id="daysPlanned" type="number" min="1" max="31" />
+            </label>
+            <label>
+              备注
+              <input id="note" type="text" />
+            </label>
+          </div>
+          <div class="actions">
+            <button id="submitBtn" type="submit">新增条目</button>
+            <button id="cancelEditBtn" type="button" class="secondary" hidden>取消编辑</button>
+          </div>
+          <p id="formError" class="error" role="alert" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="list-title">
+        <h2 id="list-title">条目列表</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>名称</th>
+                <th>类型</th>
+                <th>方式</th>
+                <th>金额</th>
+                <th>天数</th>
+                <th>本月投入</th>
+                <th>年投入</th>
+                <th>占比</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="summary-title">
+        <h2 id="summary-title">汇总</h2>
+        <p>本月总投入：<strong id="totalMonthly">¥0.00</strong></p>
+        <p>年总投入：<strong id="totalAnnual">¥0.00</strong></p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
